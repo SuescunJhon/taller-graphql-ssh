@@ -2,20 +2,27 @@ const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 const path = require('path'); 
 
+const data = require("./data/data.json");
+const personas = data.personas;
+
 // Define el esquema de GraphQL
 const typeDefs = gql`
   type Query {
-    hello(message: String!): String
+    enviarInformacion(nombre: String!): String
   }
 `;
 
 // Define los resolvers de GraphQL
 const resolvers = {
   Query: {
-    hello: (_, { message }) => {
-        return `¡Hola, ${message}! Un saludo por parte del profe `;
-      },
-  },
+    enviarInformacion: (_, { nombre }) => {
+      const persona = personas.find(p => p.nombre === nombre)
+      if (!persona) {
+        return `No se encontro información para ${nombre}`
+      }
+      return `Mi nombre es ${nombre}, tengo ${persona.edad} años. ${persona.informacion}`
+    }
+  }
 };
 
 async function startApolloServer() {

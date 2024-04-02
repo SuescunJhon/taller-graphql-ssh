@@ -7,19 +7,19 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const HELLO_QUERY = gql`
-  query Hello($message: String!) {
-    hello(message: $message)
+const INFORMACION_QUERY = gql`
+  query Query($nombre: String!) {
+    enviarInformacion(nombre: $nombre)
   }
 `;
 
 function Hello() {
-  const [message, setMessage] = useState('');
-  const [getGreeting, { loading, error, data }] = useLazyQuery(HELLO_QUERY);
+  const [nombre, setNombre] = useState('');
+  const [getGreeting, { loading, error, data }] = useLazyQuery(INFORMACION_QUERY);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getGreeting({ variables: { message } });
+    getGreeting({ variables: { nombre } });
   };
 
   if (loading) return <p>Cargando...</p>;
@@ -31,8 +31,8 @@ function Hello() {
         <Form.Group controlId="formMessage">
           <Form.Control
             type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
             placeholder="Escribe tu mensaje"
           />
         </Form.Group>
@@ -40,7 +40,7 @@ function Hello() {
           Enviar
         </Button>
       </Form>
-      {data && <h2 className='mt-3'>{data.hello}</h2>}
+      {data && <h2 className='mt-3'>{data.enviarInformacion}</h2>}
     </div>
   );
 }

@@ -4,6 +4,11 @@
             "nombre": "Jhon Suescun",
             "edad": 22,
             "informacion": "Me gustan las Sitcoms, mi Sitcom favorita es The Office"
+        },
+        {
+            "nombre": "Juan Camilo Ortiz",
+            "edad": 21,
+            "informacion": "Me gustan las hamburguesas"
         }
     ]
 }
